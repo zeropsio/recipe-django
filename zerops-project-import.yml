@@ -3,11 +3,11 @@ project:
   tags:
     - zerops-recipe
 services:
-
   - hostname: app
-    type: static
-    buildFromGit: https://github.com/zeropsio/recipe-backend-ui@alpha
-    enableSubdomainAccess: true
+    type: runtime
+    priority: 5
+    envSecrets:
+      SECRET_KEY: <@generateRandomBytes(<32>) | toString>
 
   - hostname: db
     type: postgresql@16

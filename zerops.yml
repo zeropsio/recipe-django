@@ -1,2 +1,26 @@
 zerops:
-  - setup: api
+  - setup: app
+    build:
+      os: ubuntu
+      base: python@3.12
+      buildCommands:
+        - python3.12 -m venv .venv
+        - .venv/bin/pip install -r requirements.txt
+        - sed -i 's/\/build\/source/\/var\/www/g' .venv/bin/activate
+      deployFiles:
+        - .venv/
+        - recipe/
+        - manage.py
+        - requirements.txt
+    run:
+      os: ubuntu
+      base: python@3.12
+      envVariables:
+        DB_HOST: $db_hostname
+        DB_PORT: $db_port
+        DB_USER: $db_user
+        DB_PASSWORD: $db_password
+      ports:
+        - port: 8000
+          httpSupport: true
+      start: .venv/bin/gunicorn --bind 0.0.0.0:8000 recipe.wsgi
