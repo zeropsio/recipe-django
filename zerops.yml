@@ -3,24 +3,26 @@ zerops:
     build:
       os: ubuntu
       base: python@3.12
-      buildCommands:
-        - python3.12 -m venv .venv
-        - .venv/bin/pip install -r requirements.txt
-        - sed -i 's/\/build\/source/\/var\/www/g' .venv/bin/activate
+      addToRunPrepare:
+        - requirements.txt
       deployFiles:
-        - .venv/
         - recipe/
         - manage.py
         - requirements.txt
     run:
       os: ubuntu
       base: python@3.12
+      prepareCommands:
+        - pip install --no-cache-dir -r requirements.txt
       envVariables:
         DB_HOST: $db_hostname
         DB_PORT: $db_port
         DB_USER: $db_user
         DB_PASSWORD: $db_password
+        ZEROPS_SUBDOMAIN_URL: $zeropsSubdomain
       ports:
         - port: 8000
           httpSupport: true
-      start: .venv/bin/gunicorn --bind 0.0.0.0:8000 recipe.wsgi
+      initCommands:
+        - zsc execOnce -v app-migrate python3 manage.py migrate
+      start: gunicorn --bind 0.0.0.0:8000 recipe.wsgi

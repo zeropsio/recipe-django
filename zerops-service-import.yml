@@ -1,0 +1,7 @@
+#yamlPreprocessor=on
+services:
+  - hostname: app
+    type: runtime
+    enableSubdomainAccess: true
+    envSecrets:
+      SECRET_KEY: <@generateRandomBytes(<32>) | toString>

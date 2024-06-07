@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ["SECRET_KEY"]
+SECRET_KEY = os.getenv("SECRET_KEY")
 # SECRET_KEY = "django-insecure-y29b6luwd8$u8(oi^h2wnq9v*b3(3gvh8t5rt#l-jj^0((qa*2"
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -29,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "localhost",
     "0.0.0.0",
+    os.getenv("ZEROPS_SUBDOMAIN_URL").removeprefix("https://"),
 ]
 
 # Application definition
@@ -76,7 +77,7 @@ WSGI_APPLICATION = "recipe.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "recipe": {
+    "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "db",
         "USER": os.getenv("DB_USER"),
