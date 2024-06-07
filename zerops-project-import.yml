@@ -1,0 +1,26 @@
+project:
+  name: django
+  tags:
+    - zerops-recipe
+services:
+
+  - hostname: app
+    type: static
+    buildFromGit: https://github.com/zeropsio/recipe-backend-ui@alpha
+    enableSubdomainAccess: true
+
+  - hostname: db
+    type: postgresql@16
+    mode: NON_HA
+    priority: 10
+
+  - hostname: storage
+    type: object-storage
+    objectStoragePolicy: public-read
+    objectStorageSize: 2
+    priority: 10
+
+  - hostname: mailpit
+    type: go@1
+    buildFromGit: https://github.com/zeropsio/recipe-mailpit@alpha
+    enableSubdomainAccess: true
