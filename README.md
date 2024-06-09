@@ -1,6 +1,7 @@
 # Zerops x Django
 
-![zerops-banner-nest](https://github.com/zeropsio/recipe-nestjs/assets/1303561/6df332f1-9564-4a73-81a8-e3ae20b0a392)
+![django](https://github.com/zeropsio/recipe-django/assets/1303561/b274088e-9ebf-49d7-9bc5-ada3fee8ba8a)
+
 
 [Django](https://www.djangoproject.com/) is a high-level Python web framework that encourages rapid development and clean, pragmatic design. This recipe aims to showcase an advanced integration of Nest.js in Zerops through a simple file upload demo application.
 
