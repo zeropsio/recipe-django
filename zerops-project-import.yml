@@ -1,12 +1,13 @@
 #yamlPreprocessor=on
 project:
-  name: django
+  name: django + zerops
   tags:
     - zerops-recipe
 services:
   - hostname: app
-    type: runtime
+    type: python@3.12
     priority: 5
+    buildFromGit: https://github.com/zeropsio/recipe-django
     enableSubdomainAccess: true
     envSecrets:
       SECRET_KEY: <@generateRandomBytes(<32>) | toString>
@@ -19,10 +20,10 @@ services:
   - hostname: storage
     type: object-storage
     objectStoragePolicy: public-read
-    objectStorageSize: 2
+    objectStorageSize: 5
     priority: 10
 
   - hostname: mailpit
     type: go@1
-    buildFromGit: https://github.com/zeropsio/recipe-mailpit@alpha
+    buildFromGit: https://github.com/zeropsio/recipe-mailpit
     enableSubdomainAccess: true

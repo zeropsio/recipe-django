@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,16 +24,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY")
-# SECRET_KEY = "django-insecure-y29b6luwd8$u8(oi^h2wnq9v*b3(3gvh8t5rt#l-jj^0((qa*2"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+if os.getenv("DEBUG", "0") == "1":
+    DEBUG = True
 
 ALLOWED_HOSTS = [
     "localhost",
+    "127.0.0.1",
     "0.0.0.0",
-    os.getenv("ZEROPS_SUBDOMAIN_URL").removeprefix("https://"),
 ]
+
+if os.getenv("ZEROPS_SUBDOMAIN_URL") is not None:
+    ALLOWED_HOSTS.append(os.getenv("ZEROPS_SUBDOMAIN_URL").removeprefix("https://"))
 
 # Application definition
 
@@ -120,6 +127,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
+
+if os.getenv("USE_S3", "0") == "1":
+    AWS_ACCESS_KEY_ID = os.getenv("S3_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.getenv("S3_SECRET_ACCESS_KEY")
+    AWS_STORAGE_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
+    AWS_S3_ENDPOINT_URL = os.getenv("S3_ENDPOINT_URL")
+    AWS_S3_ADDRESSING_STYLE = "path"
+    AWS_S3_FILE_OVERWRITE = True
+    AWS_LOCATION = "static/"
+
+    STATIC_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/{AWS_LOCATION}/"
+    STATICFILES_STORAGE = "storages.backends.s3.S3Storage"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
