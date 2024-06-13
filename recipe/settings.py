@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -36,12 +37,20 @@ ALLOWED_HOSTS = [
     "0.0.0.0",
 ]
 
-if os.getenv("ZEROPS_SUBDOMAIN_URL") is not None:
-    ALLOWED_HOSTS.append(os.getenv("ZEROPS_SUBDOMAIN_URL").removeprefix("https://"))
+CSRF_TRUSTED_ORIGINS = [
+    # PRODUCTION: Put your domain here.
+]
+
+zerops_subdomain = os.getenv("ZEROPS_SUBDOMAIN")
+if zerops_subdomain is not None:
+    ALLOWED_HOSTS += zerops_subdomain.removeprefix("https://")
+    CSRF_TRUSTED_ORIGINS += zerops_subdomain
+
 
 # Application definition
 
 INSTALLED_APPS = [
+    "files.apps.FilesConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -73,6 +82,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.media",
             ],
         },
     },
@@ -126,8 +136,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "static/"
-
 if os.getenv("USE_S3", "0") == "1":
     AWS_ACCESS_KEY_ID = os.getenv("S3_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = os.getenv("S3_SECRET_ACCESS_KEY")
@@ -135,13 +143,24 @@ if os.getenv("USE_S3", "0") == "1":
     AWS_S3_ENDPOINT_URL = os.getenv("S3_ENDPOINT_URL")
     AWS_S3_ADDRESSING_STYLE = "path"
     AWS_S3_FILE_OVERWRITE = True
-    AWS_LOCATION = "static/"
 
-    STATIC_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/{AWS_LOCATION}/"
+    STATIC_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/static/"
     STATICFILES_STORAGE = "storages.backends.s3.S3Storage"
+
+    MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/media/"
+    DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
+else:
+    STATIC_URL = "/static/"
+    MEDIA_URL = "/media/"
+    STATIC_ROOT = os.path.join(BASE_DIR, "assets/staticfiles/")
+    MEDIA_ROOT = os.path.join(BASE_DIR, "assets/mediafiles/")
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Email settings.
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")

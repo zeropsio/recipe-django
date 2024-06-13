@@ -1,0 +1,23 @@
+{% extends 'files/layout.html' %}
+
+{% block content %}
+{% if latest_files_list %}
+    <ul>
+        {% for file in latest_files_list %}
+            <li>
+                <a href="{% url 'files:detail' file.id %}">{{ file.file.name }}</a>
+                <i><img src="{{ file.file.url }}" alt="no preview available, file is not an image" width="128"/></i>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No files uploaded yet.</p>
+{% endif %}
+
+<form action="{% url 'files:upload' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <input type="file" name="file"/>
+    <input type="submit" value="Upload"/>
+</form>
+{% endblock %}

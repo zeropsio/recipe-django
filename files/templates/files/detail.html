@@ -1,0 +1,11 @@
+{% extends 'files/layout.html' %}
+
+{% block content %}
+<a href="{% url 'files:index' %}">Back to index</a>
+<div>
+    <h1>{{ file }}</h1>
+    <p><a href="{{ file.file.url }}">{{ file.file.name }}</a> uploaded at <i>{{ file.uploaded_at }}</i></p>
+    <i><img src="{{ file.file.url }}" alt="no preview available, file is not an image" width="256"></i>
+    <p>Email was sent about this upload to mailpit.</p>
+</div>
+{% endblock %}

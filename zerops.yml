@@ -6,7 +6,7 @@ zerops:
       addToRunPrepare:
         - requirements.txt
       deployFiles:
-        - polls/
+        - files/
         - recipe/
         - manage.py
     run:
@@ -26,10 +26,15 @@ zerops:
         S3_SECRET_ACCESS_KEY: $storage_secretAccessKey
         S3_BUCKET_NAME: $storage_bucketName
         S3_ENDPOINT_URL: $storage_apiUrl
+        EMAIL_HOST: mailpit
+        EMAIL_PORT: "1025"
       ports:
         - port: 8000
           httpSupport: true
       initCommands:
-        - zsc execOnce app-migrate-${ZEROPS_appVersionId} -- python manage.py migrate
-        - zsc execOnce app-collectstatic-${ZEROPS_appVersionId} -- python manage.py collectstatic --no-input --verbosity 3
-      start: gunicorn --bind 0.0.0.0:8000 recipe.wsgi
+        # Exec everytime we build a new app version.
+        - zsc execOnce migrate-${ZEROPS_appVersionId} -- python manage.py migrate
+        - zsc execOnce collectstatic-${ZEROPS_appVersionId} -- python manage.py collectstatic --no-input --verbosity 3
+        # Exec just once.
+        - zsc execOnce createsuperuser -- python manage.py createsuperuser --no-input --username admin --email admin@mysite.com
+      start: gunicorn --bind 0.0.0.0:8000 --access-logfile - --log-level debug recipe.wsgi

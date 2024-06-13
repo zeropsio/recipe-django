@@ -1,10 +1,10 @@
-.idea
-.venv
+.idea/
+.venv/
 *.log
 *.pot
 *.pyc
 __pycache__
 db.sqlite3
-media
+assets/
 
 .env

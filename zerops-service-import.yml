@@ -1,7 +1,0 @@
-#yamlPreprocessor=on
-services:
-  - hostname: app
-    type: python@3.12
-    enableSubdomainAccess: true
-    envSecrets:
-      SECRET_KEY: <@generateRandomBytes(<32>) | toString>
