@@ -26,8 +26,8 @@ zerops:
         S3_SECRET_ACCESS_KEY: $storage_secretAccessKey
         S3_BUCKET_NAME: $storage_bucketName
         S3_ENDPOINT_URL: $storage_apiUrl
-        EMAIL_HOST: mailpit
-        EMAIL_PORT: "1025"
+        MAIL_HOST: mailpit
+        MAIL_PORT: "1025"
       ports:
         - port: 8000
           httpSupport: true
@@ -37,4 +37,4 @@ zerops:
         - zsc execOnce collectstatic-${ZEROPS_appVersionId} -- python manage.py collectstatic --no-input --verbosity 3
         # Exec just once.
         - zsc execOnce createsuperuser -- python manage.py createsuperuser --no-input --username admin --email admin@mysite.com
-      start: gunicorn --bind 0.0.0.0:8000 --access-logfile - --log-level debug recipe.wsgi
+      start: gunicorn --bind 0.0.0.0:8000 --access-logfile - recipe.wsgi

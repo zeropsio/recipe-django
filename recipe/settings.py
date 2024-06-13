@@ -37,14 +37,15 @@ ALLOWED_HOSTS = [
     "0.0.0.0",
 ]
 
-CSRF_TRUSTED_ORIGINS = [
-    # PRODUCTION: Put your domain here.
-]
+CSRF_TRUSTED_ORIGINS = []
 
-zerops_subdomain = os.getenv("ZEROPS_SUBDOMAIN")
-if zerops_subdomain is not None:
-    ALLOWED_HOSTS += zerops_subdomain.removeprefix("https://")
-    CSRF_TRUSTED_ORIGINS += zerops_subdomain
+if os.getenv("APP_DOMAIN") is not None:
+    CSRF_TRUSTED_ORIGINS += [os.getenv("APP_DOMAIN")]
+
+zerops_subdomain_url = os.getenv("ZEROPS_SUBDOMAIN_URL")
+if zerops_subdomain_url is not None:
+    ALLOWED_HOSTS += [zerops_subdomain_url.removeprefix("https://")]
+    CSRF_TRUSTED_ORIGINS += [zerops_subdomain_url]
 
 
 # Application definition
@@ -162,5 +163,5 @@ else:
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Email settings.
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_HOST = os.getenv("MAIL_HOST")
+EMAIL_PORT = os.getenv("MAIL_PORT")
