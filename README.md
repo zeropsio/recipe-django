@@ -3,7 +3,9 @@
 ![django](https://github.com/zeropsio/recipe-shared-assets/blob/main/covers/cover-django.png)
 
 
-[Django](https://www.djangoproject.com/) is a high-level Python web framework that encourages rapid development and clean, pragmatic design. This recipe aims to showcase an integration of Django in Zerops through a simple file upload demo application.
+[Django](https://www.djangoproject.com/) is a high-level Python web framework that encourages rapid development and clean, pragmatic design. This recipe aims to showcase an integration of Django in [Zerops](https://zerops.io) through a simple file upload demo application.
+
+<br />
 
 ## Deploy on Zerops
 You can either click the deploy button to deploy directly on Zerops, or manually copy the [import yaml](https://github.com/zeropsio/recipe-django/blob/main/zerops-project-import.yml) to the import dialog in the Zerops app.
@@ -41,3 +43,6 @@ Base of the recipe is ready for production, the difference comes down to:
 - Since the Django app will run behind our HTTP balancer proxy, add your domain/subdomains to ***recipe/settings.py*** ***CSRF_TRUSTED_ORIGINS*** setting or add ***APP_DOMAIN*** secret variable (in recipe YAML, ***app*** service section)
 
 <br/>
+<br/>
+
+Need help setting your project up? Join [Zerops Discord community](https://discord.com/invite/WDvCZ54).
