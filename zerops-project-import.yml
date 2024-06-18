@@ -3,6 +3,7 @@ project:
   name: recipe-django
   tags:
     - zerops-recipe
+    
 services:
   - hostname: app
     type: python@3.12
@@ -28,3 +29,9 @@ services:
     type: go@1
     buildFromGit: https://github.com/zeropsio/recipe-mailpit
     enableSubdomainAccess: true
+
+  - hostname: adminer
+    type: php-apache@8.1
+    buildFromGit: https://github.com/zeropsio/recipe-adminer
+    enableSubdomainAccess: true
+    
