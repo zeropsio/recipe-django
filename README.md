@@ -26,6 +26,7 @@ You can either click the deploy button to deploy directly on Zerops, or manually
 - Automatic Django **database migrations**, **static files collection** and **superuser seeding**
 - Utilization of Zerops built-in **environment variables** system
 - **[Mailpit](https://github.com/axllent/mailpit)** as **SMTP mock server**
+- **[Adminer](https://www.adminer.org)** for **quick database management** tool
 - Unlocked development experience:
   - Access to database and mail mock through Zerops project VPN (`zcli vpn up`)
   - Prepared `.env.dist` file (`cp .env.dist .env` and change ***** secrets found in Zerops GUI)
@@ -40,11 +41,10 @@ Base of the recipe is ready for production, the difference comes down to:
 - Use at least two containers for Django service to achieve high reliability and resilience (add ***minContainers: 2*** in recipe YAML, ***app*** service section)
 - Use production-ready third-party SMTP server instead of Mailpit (change ***MAIL_*** secret variables in recipe YAML ***app*** service)
 - Since the Django app will run behind our HTTP balancer proxy, add your domain/subdomains to ***recipe/settings.py*** ***CSRF_TRUSTED_ORIGINS*** setting or add ***APP_DOMAIN*** secret variable (in recipe YAML, ***app*** service section)
+- Disable public access to Adminer or remove it altogether (remove service adminer from recipe YAML)
 
 <br/>
 <br/>
-
-Need help setting your project up? Join [Zerops Discord community](https://discord.com/invite/WDvCZ54).
 
 ## Changes made over the default installation
 
