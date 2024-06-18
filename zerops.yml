@@ -36,5 +36,5 @@ zerops:
         - zsc execOnce migrate-${ZEROPS_appVersionId} -- python manage.py migrate
         - zsc execOnce collectstatic-${ZEROPS_appVersionId} -- python manage.py collectstatic --no-input --verbosity 3
         # Exec just once.
-        - zsc execOnce createsuperuser -- python manage.py createsuperuser --no-input --username admin --email admin@mysite.com
+        - zsc execOnce createsuperuser -- python manage.py createsuperuser --no-input --username admin --email admin@example.com
       start: gunicorn --bind 0.0.0.0:8000 --access-logfile - recipe.wsgi

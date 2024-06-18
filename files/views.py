@@ -34,8 +34,8 @@ def upload(request):
     send_mail(
         "New upload.",
         f"File {uploaded_file.name} with size {uploaded_file.size} has been uploaded.",
-        "noreply@mysite.com",
-        ["guest@mysite.com"],
+        "noreply@example.com",
+        ["guest@example.com"],
         fail_silently=False,
     )
 
