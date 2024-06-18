@@ -25,6 +25,7 @@ You can either click the deploy button to deploy directly on Zerops, or manually
 - Zerops **Object Storage** (S3 compatible) service as file system
 - Automatic Django **database migrations**, **static files collection** and **superuser seeding**
 - Utilization of Zerops built-in **environment variables** system
+- Logs set up to use **syslog** and accessible through Zerops GUI
 - **[Mailpit](https://github.com/axllent/mailpit)** as **SMTP mock server**
 - **[Adminer](https://www.adminer.org)** for **quick database management** tool
 - Unlocked development experience:
