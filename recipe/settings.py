@@ -162,6 +162,28 @@ else:
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Email settings.
+# Mailing
 EMAIL_HOST = os.getenv("MAIL_HOST")
-EMAIL_PORT = os.getenv("MAIL_PORT")
+EMAIL_PORT = os.getenv("MAIL_PORT", "1025")
+
+# Logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "INFO",
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+    },
+}

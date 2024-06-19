@@ -3,7 +3,7 @@
 ![django](https://github.com/zeropsio/recipe-shared-assets/blob/main/covers/cover-django.png)
 
 
-[Django](https://www.djangoproject.com/) is a high-level Python web framework that encourages rapid development and clean, pragmatic design. This recipe aims to showcase a cloud-like integration of Django in [Zerops](https://zerops.io) through a simple file upload demo application.
+[Django](https://www.djangoproject.com/) is a high-level Python web framework that encourages rapid development and clean, pragmatic design. This recipe aims to showcase an integration of Django in [Zerops](https://zerops.io) through a simple file upload demo application.
 
 <br />
 
@@ -25,7 +25,7 @@ You can either click the deploy button to deploy directly on Zerops, or manually
 - Zerops **Object Storage** (S3 compatible) service as file system
 - Automatic Django **database migrations**, **static files collection** and **superuser seeding**
 - Utilization of Zerops built-in **environment variables** system
-- Logs set up to use **syslog** and accessible through Zerops GUI
+- Logs accessible through Zerops GUI
 - **[Mailpit](https://github.com/axllent/mailpit)** as **SMTP mock server**
 - **[Adminer](https://www.adminer.org)** for **quick database management** tool
 - Unlocked development experience:
@@ -53,7 +53,7 @@ If you want to modify your existing Django app to efficiently run on Zerops, the
 
 - Add [zerops.yml](https://github.com/zeropsio/recipe-django/blob/main/zerops.yml) to your repository, our example includes idempotent migrations, static files collection and optimized build process
 - Run `pip install django-storages` and change storage settings section in your `project/settings.py` to support S3 compatible Object Storage file system (more info [here](https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html))
-- Utilize Zerops [environment variables](https://github.com/zeropsio/recipe-django/blob/main/zerops.yml#L18-L30) and [secrets](https://github.com/zeropsio/recipe-django/blob/main/zerops.yml#L18-L30) to set up S3 for file system, database access, mailer and trusted hosts to work with reverse proxy load balancer
+- Utilize Zerops [environment variables](https://github.com/zeropsio/recipe-django/blob/main/zerops.yml#L18-L30) and [secrets](https://github.com/zeropsio/recipe-django/blob/main/zerops-project-import.yml#L12-L15) to set up S3 for file system, database access, mailer and trusted hosts to work with reverse proxy load balancer
 - Add init commands for your deployments to [migrate database and collect static images](https://github.com/zeropsio/recipe-django/blob/main/zerops.yml#L34-L39)
 
 <br/>
