@@ -53,7 +53,7 @@ If you want to modify your existing Django app to efficiently run on Zerops, the
 
 - Add [zerops.yml](https://github.com/zeropsio/recipe-django/blob/main/zerops.yml) to your repository, our example includes idempotent migrations, static files collection and optimized build process
 - Run `pip install django-storages` and change storage settings section in your `project/settings.py` to support S3 compatible Object Storage file system (more info [here](https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html))
-- Utilize Zerops [environment variables](https://github.com/zeropsio/recipe-django/blob/main/zerops.yml#L18-L30) and [secrets](https://github.com/zeropsio/recipe-django/blob/main/zerops-project-import.yml#L12-L15) to set up S3 for file system, database access, mailer and trusted hosts to work with reverse proxy load balancer
+- Utilize Zerops [environment variables](https://github.com/zeropsio/recipe-django/blob/main/zerops.yml#L18-L32) and [secrets](https://github.com/zeropsio/recipe-django/blob/main/zerops-project-import.yml#L12-L15) to set up S3 for file system, database access, mailer and trusted hosts to work with reverse proxy load balancer
 - Add init commands for your deployments to [migrate database and collect static images](https://github.com/zeropsio/recipe-django/blob/main/zerops.yml#L34-L39)
 
 <br/>

@@ -9,6 +9,7 @@ zerops:
         - files/
         - recipe/
         - manage.py
+        - gunicorn.conf.py
     run:
       os: alpine
       base: python@3.12
@@ -16,6 +17,8 @@ zerops:
         - apk add tzdata
         - pip install --no-cache-dir -r requirements.txt
       envVariables:
+        PYTHONDONTWRITEBYTECODE: "1"
+        PYTHONUNBUFFERED: "1"
         ZEROPS_SUBDOMAIN_URL: $zeropsSubdomain
         DB_HOST: $db_hostname
         DB_PORT: $db_port
@@ -37,4 +40,4 @@ zerops:
         - zsc execOnce collectstatic-${ZEROPS_appVersionId} -- python manage.py collectstatic --no-input --verbosity 3
         # Exec just once.
         - zsc execOnce createsuperuser -- python manage.py createsuperuser --no-input --username admin --email admin@example.com
-      start: gunicorn --bind 0.0.0.0:8000 --access-logfile - recipe.wsgi
+      start: gunicorn recipe.wsgi

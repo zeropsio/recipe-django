@@ -1,12 +1,18 @@
+import logging
+
 from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
 from files.models import File
 
+logger = logging.getLogger(__name__)
+
 
 def index(request):
     latest_files_list = File.objects.order_by("-uploaded_at")[:5]
+
+    logger.info(f"serving last {len(latest_files_list)} files")
 
     context = {
         "latest_files_list": latest_files_list,
@@ -17,6 +23,8 @@ def index(request):
 
 def detail(request, file_id):
     file = get_object_or_404(File, pk=file_id)
+
+    logger.info(f"serving file {file_id}")
 
     context = {
         "file": file,
@@ -38,5 +46,7 @@ def upload(request):
         ["guest@example.com"],
         fail_silently=False,
     )
+
+    logger.info(f"uploaded file {uploaded_file.name}")
 
     return redirect("files:detail", file_id=file.id)

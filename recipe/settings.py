@@ -170,20 +170,26 @@ EMAIL_PORT = os.getenv("MAIL_PORT", "1025")
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{module}: [{levelname}] {message}",
+            "style": "{",
+        },
+    },
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
+            "formatter": "verbose",
         },
-    },
-    "root": {
-        "handlers": ["console"],
-        "level": "INFO",
     },
     "loggers": {
         "django": {
             "handlers": ["console"],
-            "level": "DEBUG",
-            "propagate": False,
+            "level": "INFO",
+        },
+        "files": {
+            "handlers": ["console"],
+            "level": "INFO",
         },
     },
 }
