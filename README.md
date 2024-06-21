@@ -3,16 +3,14 @@
 ![django](https://github.com/zeropsio/recipe-shared-assets/blob/main/covers/cover-django.png)
 
 
-[Django](https://www.djangoproject.com/) is a high-level Python web framework that encourages rapid development and clean, pragmatic design. This recipe aims to showcase an integration of Django in [Zerops](https://zerops.io) through a simple file upload demo application.
+[Django](https://www.djangoproject.com/) is a high-level Python web framework that encourages rapid development and clean, pragmatic design. This recipe aims to showcase few advanced Django concepts and how to integrate them with [Zerops](https://zerops.io), all through a simple file upload demo application.
 
 <br />
 
 ## Deploy on Zerops
 You can either click the deploy button to deploy directly on Zerops, or manually copy the [import yaml](https://github.com/zeropsio/recipe-django/blob/main/zerops-project-import.yml) to the import dialog in the Zerops app.
 
-<a href="https://app.zerops.io/recipe/django">
-    <img width="250" alt="Deploy on Zerops" src="https://github.com/zeropsio/recipe-shared-assets/blob/main/deploy-button/deploy-button.png">
-</a>
+[![Deploy on Zerops](https://github.com/zeropsio/recipe-shared-assets/blob/main/deploy-button/green/deploy-button.svg)](https://app.zerops.io/recipe/django)
 
 <br/>
 <br/>
