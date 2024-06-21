@@ -3,7 +3,7 @@
 ![django](https://github.com/zeropsio/recipe-shared-assets/blob/main/covers/cover-django.png)
 
 
-[Django](https://www.djangoproject.com/) is a high-level Python web framework that encourages rapid development and clean, pragmatic design. This recipe aims to showcase an integration of Django in [Zerops](https://zerops.io) through a simple file upload demo application.
+[Django](https://www.djangoproject.com/) is a high-level Python web framework that encourages rapid development and clean, pragmatic design. This recipe aims to showcase few advanced Django concepts and how to integrate them with [Zerops](https://zerops.io), all through a simple file upload demo application.
 
 <br />
 
