@@ -14,7 +14,7 @@ zerops:
       os: alpine
       base: python@3.12
       prepareCommands:
-        - apk add tzdata
+        - sudo apk add tzdata
         - pip install --no-cache-dir -r requirements.txt
       envVariables:
         PYTHONDONTWRITEBYTECODE: "1"
