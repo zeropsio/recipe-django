@@ -42,7 +42,7 @@ CSRF_TRUSTED_ORIGINS = []
 if os.getenv("APP_DOMAIN") is not None:
     CSRF_TRUSTED_ORIGINS += [os.getenv("APP_DOMAIN")]
 
-zerops_subdomain_url = os.getenv("ZEROPS_SUBDOMAIN_URL")
+zerops_subdomain_url = os.getenv("APP_SUBDOMAIN_URL")
 if zerops_subdomain_url is not None:
     ALLOWED_HOSTS += [zerops_subdomain_url.removeprefix("https://")]
     CSRF_TRUSTED_ORIGINS += [zerops_subdomain_url]

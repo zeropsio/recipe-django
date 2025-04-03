@@ -19,7 +19,7 @@ zerops:
       envVariables:
         PYTHONDONTWRITEBYTECODE: "1"
         PYTHONUNBUFFERED: "1"
-        ZEROPS_SUBDOMAIN_URL: $zeropsSubdomain
+        APP_SUBDOMAIN_URL: $zeropsSubdomain
         DB_HOST: $db_hostname
         DB_PORT: $db_port
         DB_USER: $db_user
